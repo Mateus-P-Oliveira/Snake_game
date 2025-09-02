@@ -1,15 +1,17 @@
 #include "render.h"
-#include <iostream>
 #include <curses.h>
+#include <vector>
 
+void render(const std::vector<std::vector<char>>& grid) {
+    // Limpa tela antes de redesenhar
+    clear();
 
-void render(bool inputReceived) {
-    if(inputReceived == true){
-        //std::cout << "Desenhando frame..." << std::endl;
-        for (int i = 5; i < 5+2; i++) {
-            mvaddch(5, i, ' ' | A_REVERSE);
+    for (int y = 0; y < grid.size(); y++) {
+        for (int x = 0; x < grid[y].size(); x++) {
+            mvaddch(y, x, grid[y][x]);
         }
     }
-    
 
+    refresh(); // Atualiza a tela
 }
+

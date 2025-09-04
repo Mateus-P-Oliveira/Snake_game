@@ -4,6 +4,7 @@
 #include <deque>
 #include <utility> // std::pair
 
+
 class Snake {
 private:
     std::deque<std::pair<int,int>> body; // corpo da cobra (lista de posições)
@@ -13,7 +14,7 @@ private:
 public:
     Snake(int startY, int startX);
 
-    void move(int dy, int dx);       // move a cobra na direção
+    void move(int dy, int dx, bool grow);       // move a cobra na direção
     void grow();                     // aumenta de tamanho
     bool isAlive() const;            // retorna estado da cobra
     std::pair<int,int> getHead() const; // posição da cabeça

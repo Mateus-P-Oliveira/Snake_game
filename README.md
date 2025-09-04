@@ -15,4 +15,4 @@ Core Gameplay:
 
 
 Compile:
-g++ -I D:/Programas/mingw64/include main.cpp render.cpp D:/Programas/mingw64/lib/pdcurses.a -o programa
+g++ -I D:/Programas/mingw64/include main.cpp render.cpp snakePlayer.cpp D:/Programas/mingw64/lib/pdcurses.a -o programa

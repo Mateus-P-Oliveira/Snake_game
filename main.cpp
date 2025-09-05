@@ -112,6 +112,9 @@ int main()
         player.move(dy, dx, grow);
 
          if (grow) {
+            auto oldFood = food;
+            food = spawnFood(player);
+            grid[oldFood.first][oldFood.second] = ' '; // apaga 'X' antiga
             food = spawnFood(player);
         }
         // checa colisão com paredes

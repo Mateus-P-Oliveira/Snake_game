@@ -14,6 +14,15 @@ void Snake::move(int dy, int dx, bool grow) {
     auto newHead = std::make_pair(head.first + dy, head.second + dx);
     //int newY = head.first + dy;
     //int newX = head.second + dx;
+
+ // --- checa colisão com o próprio corpo ---
+    for (size_t i = 1; i < body.size(); i++) {
+        if (body[i] == newHead) {
+            alive = false;   // morreu
+            return;
+        }
+    }
+
     body.insert(body.begin(), newHead); // adiciona cabeça
 
     // insere nova cabeça

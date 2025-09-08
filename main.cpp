@@ -16,9 +16,9 @@ std::pair<int,int> food;
 
 // Gera comida aleatória em posição livre
 std::pair<int,int> spawnFood(const Snake& player) {
-    while (true) {
-        int y = rand() % 20;
-        int x = rand() % 80;
+    while (true) {//Garantir que a comida de spawn dentro da area jogavel
+        int y = (rand() % (20 - 2)) + 1;
+        int x = (rand() % (80 - 2)) + 1;
 
         // garantir que não cai dentro da cobra
         bool insideSnake = false;

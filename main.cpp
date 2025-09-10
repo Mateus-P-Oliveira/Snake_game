@@ -12,30 +12,32 @@ using namespace std;
 #define MY_KEY_LEFT 452
 #define MY_KEY_RIGHT 454
 
-std::pair<int,int> food;
+std::pair<int, int> food;
 
 // Gera comida aleatória em posição livre
-std::pair<int,int> spawnFood(const Snake& player) {
-    while (true) {//Garantir que a comida de spawn dentro da area jogavel
+std::pair<int, int> spawnFood(const Snake &player)
+{
+    while (true)
+    { // Garante que a comida de spawn dentro da area jogavel
         int y = (rand() % (20 - 2)) + 1;
         int x = (rand() % (80 - 2)) + 1;
 
         // garantir que não cai dentro da cobra
         bool insideSnake = false;
-        for (auto [sy, sx] : player.getBody()) {
-            if (sy == y && sx == x) {
+        for (auto [sy, sx] : player.getBody())
+        {
+            if (sy == y && sx == x)
+            {
                 insideSnake = true;
                 break;
             }
         }
-        if (!insideSnake) {
+        if (!insideSnake)
+        {
             return {y, x};
         }
     }
 }
-
-
-
 
 int main()
 {
@@ -44,7 +46,7 @@ int main()
     initscr();
     noecho();
     cbreak();
-    keypad(stdscr, TRUE);  // Mudar depois
+    keypad(stdscr, TRUE);
     curs_set(0);
 
     nodelay(stdscr, TRUE); // não trava no getch()
@@ -62,7 +64,7 @@ int main()
     }
     for (int y = 0; y < height; y++)
     {
-        grid[y][0] = '#'; 
+        grid[y][0] = '#';
         grid[y][width - 1] = '#';
     }
 
@@ -111,20 +113,19 @@ int main()
         bool grow = (head == food);
         player.move(dy, dx, grow);
 
-         if (grow) {
+        if (grow)
+        {
             auto oldFood = food;
             food = spawnFood(player);
             grid[oldFood.first][oldFood.second] = ' '; // apaga 'X' antiga
             food = spawnFood(player);
         }
         // checa colisão com paredes
-        //auto head = player.getHead();
+        // auto head = player.getHead();
         if (grid[head.first][head.second] == '#')
         {
             break; // morreu
         }
-
-        
 
         grid[food.first][food.second] = 'X';
         // --- Render ---
